@@ -98,7 +98,7 @@ module.exports = {
 ### 💻 Method 2: Local Hosting (PC/VPS)
 
 ```bash
-git clone https://github.com/YourUsername/MCS-BOT.git
+git clone https://github.com/mohammadbadol/BADOL.git
 cd MCS-BOT
 npm install
 node index.js
