@@ -5,7 +5,7 @@ function escapeMarkdown(text) {
 
 module.exports.config = {
   name: "uid",
-  credits: "MOHAMMAD-BADOL",
+  credits: "LIKHON AHMED",
   aliases: ["id", "userid", "whois"],
   prefix: true,
   permission: 0,
