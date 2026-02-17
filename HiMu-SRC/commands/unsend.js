@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports.config = {
     name: "unsend",
-    credits: "MOHAMMAD-BADOL",
+    credits: "LIKHON AHMED",
     aliases: ["delete", "del"],
     prefix: true,
     permission: 1,
