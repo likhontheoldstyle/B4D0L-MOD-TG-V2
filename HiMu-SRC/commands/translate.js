@@ -2,7 +2,7 @@ const axios = require('axios');
 
 module.exports.config = {
     name: "translate",
-    credits: "MOHAMMAD-BADOL",
+    credits: "LIKHON AHMED",
     aliases: ["tr", "tl"],
     prefix: true,
     permission: 0,
