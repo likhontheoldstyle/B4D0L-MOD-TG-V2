@@ -1,175 +1,125 @@
-const path = require('path');
+const reset = "\x1b[0m";
 
-const fs = require('fs');
+const colors = {
 
-const logger = require('./logger'); // লগার ইমপোর্ট
+    cyan: "\x1b[38;5;51m",       
 
-module.exports = function(commandsPath, eventsPath) {
+    yellow: "\x1b[38;5;226m",     
 
-    /**
+    matrixGray: "\x1b[38;5;240m",
 
-     * ১. সাধারণ কমান্ড লোড করার ফাংশন (Cmd Folder)
-
-     */
-
-    global.loadCommand = function(commandName) {
-
-        const filename = `${commandName}.js`;
-
-        const filePath = path.join(commandsPath, filename);
-
-        if (!fs.existsSync(filePath)) return;
-
-        // আগের ক্যাশ ডিলিট করা (Hot Reloading এর জন্য)
-
-        const resolvedPath = require.resolve(filePath);
-
-        if (require.cache[resolvedPath]) delete require.cache[resolvedPath];
-
-        try {
-
-            const commandModule = require(filePath);
-
-            if (!commandModule.config || !commandModule.run) {
-
-                throw new Error(`Invalid command structure in ${filename}`);
-
-            }
-
-            const cmdConfigName = commandModule.config.name || commandName;
-
-            
-
-            // কমান্ড রেজিস্টার করা
-
-            global.COMMANDS[cmdConfigName] = commandModule;
-
-            global.loadedCommands.push(commandModule.config);
-
-            
-
-            // এলিয়াস (Aliases) সেট করা
-
-            if (commandModule.config.aliases && Array.isArray(commandModule.config.aliases)) {
-
-                commandModule.config.aliases.forEach(alias => {
-
-                    global.ALIASES[alias] = cmdConfigName;
-
-                });
-
-            }
-
-            // কনসোল আউটপুট
-
-            console.log(` \x1b[37m[ CMD ]\x1b[0m Loaded → Name: \x1b[33m${cmdConfigName.padEnd(12)}\x1b[0m | File: \x1b[32m${filename}\x1b[0m`);
-
-        } catch (err) {
-
-            logger.logError("Load CMD", err, filename);
-
-        }
-
-    };
-
-    /**
-
-     * ২. ইভেন্ট কমান্ড লোড করার ফাংশন (Event Folder)
-
-     */
-
-    global.loadEvent = function(eventName) {
-
-        const filename = `${eventName}.js`;
-
-        const filePath = path.join(eventsPath, filename);
-
-        if (!fs.existsSync(filePath)) return;
-
-        const resolvedPath = require.resolve(filePath);
-
-        if (require.cache[resolvedPath]) delete require.cache[resolvedPath];
-
-        try {
-
-            const eventModule = require(filePath);
-
-            if (!eventModule.config || !eventModule.run) {
-
-                throw new Error(`Invalid event structure in ${filename}`);
-
-            }
-
-            const eName = eventModule.config.name || eventName;
-
-            
-
-            // ইভেন্ট রেজিস্টার করা
-
-            global.EVENTS[eName] = eventModule;
-
-            console.log(` \x1b[36m[ EVENT ]\x1b[0m Loaded → Name: \x1b[35m${eName.padEnd(11)}\x1b[0m | File: \x1b[32m${filename}\x1b[0m`);
-
-        } catch (err) {
-
-            logger.logError("Load Event", err, filename);
-
-        }
-
-    };
-
-    /**
-
-     * ৩. কমান্ড আনলোড করার ফাংশন
-
-     */
-
-    global.unloadCommand = function(commandName) {
-
-        const cmd = global.COMMANDS[commandName];
-
-        if (!cmd) return;
-
-        const index = global.loadedCommands.findIndex(c => c.name === commandName);
-
-        if (index > -1) global.loadedCommands.splice(index, 1);
-
-        if (cmd.config.aliases) {
-
-            cmd.config.aliases.forEach(alias => delete global.ALIASES[alias]);
-
-        }
-
-        delete global.COMMANDS[commandName];
-
-    };
-
-    /**
-
-     * ৪. বট কলব্যাক ইনিশিয়ালাইজেশন
-
-     */
-
-    global.initializeBotCallbacks = function(telegramBot) {
-
-        for (const name in global.COMMANDS) {
-
-            if (global.COMMANDS[name].initCallback) {
-
-                try { 
-
-                    global.COMMANDS[name].initCallback(telegramBot); 
-
-                } catch (e) { 
-
-                    logger.logError("Callback", e, name); 
-
-                }
-
-            }
-
-        }
-
-    };
+    green: "\x1b[38;5;46m"
 
 };
+
+function wrapInHackerBox(title, contentLines, color = colors.cyan) {
+
+    const cleanStr = (s) => s.replace(/\x1b\[[0-9;]*m/g, '');
+
+    const maxContentWidth = 45; 
+
+    const top = color + '+' + '-'.repeat(maxContentWidth) + '+' + reset;
+
+    const titlePadding = Math.max(0, Math.floor((maxContentWidth - cleanStr(title).length) / 2));
+
+    const titleLine = color + '|' + ' '.repeat(titlePadding) + title.toUpperCase() + ' '.repeat(maxContentWidth - titlePadding - cleanStr(title).length) + '|' + reset;
+
+    const formattedLines = contentLines.map(line => {
+
+        const lineLen = cleanStr(line).length;
+
+        const padding = Math.max(0, maxContentWidth - lineLen - 1);
+
+        return `${color}| ${reset}${line}${' '.repeat(padding)}${color}|${reset}`;
+
+    }).join('\n');
+
+    return `${top}\n${titleLine}\n${top}\n${formattedLines}\n${top}`;
+
+}
+
+function printBanner(cmdCount) {
+
+    const set = global.CONFIG.BOT_SETTINGS;
+
+    const owner = global.CONFIG.OWNER;
+
+    const social = global.CONFIG.SOCIAL;
+
+    
+
+    const time = colors.yellow + new Date().toLocaleString("en-US", { 
+
+        timeZone: "Asia/Dhaka",
+
+        hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true 
+
+    }) + reset;
+
+    
+
+    const botInfoLines = [
+
+        `${colors.cyan}SYSTEM ACCESS : GRANTED${reset}`,
+
+        `${colors.cyan}BOT NAME      : ${set.NAME}${reset}`,
+
+        `${colors.cyan}OWNER         : ${owner.NAME}${reset}`,
+
+        `${colors.cyan}OWNER ID      : ${owner.ID}${reset}`,
+
+        `${colors.matrixGray}-------------------------------------------${reset}`,
+
+        `${colors.cyan}LOADED CMDS   : ${cmdCount}${reset}`,  
+
+        `${colors.cyan}BOT PREFIX    : [ ${set.PREFIX} ]${reset}`,
+
+        `${colors.cyan}VERSION       : ${set.VERSION}${reset}`,
+
+        `${colors.matrixGray}-------------------------------------------${reset}`,
+
+        `${colors.green}STATUS >> BOT RUNNING SUCCESSFULLY${reset}`,
+
+        `${colors.cyan}TIME   >> ${time}${reset}` 
+
+    ];
+
+    const adminContactLines = [
+
+        `${colors.cyan}TELEGRAM  : ${social.TELEGRAM.replace('https://', '')}${reset}`,
+
+        `${colors.cyan}WHATSAPP  : ${social.WHATSAPP.replace('wa.me/', '')}${reset}`,
+
+        `${colors.cyan}FACEBOOK  : fb.me/B4D9L${reset}`,
+
+        `${colors.cyan}SUPPORT   : 24/7 VIP Active${reset}`
+
+    ];
+
+    console.clear();
+
+    console.log(colors.cyan + String.raw`
+
+ ██████╗  █████╗ ██████╗  ██████╗ ██╗     
+
+ ██╔══██╗██╔══██╗██╔══██╗██╔═══██╗██║     
+
+ ██████╔╝███████║██║  ██║██║   ██║██║     
+
+ ██╔══██╗██╔══██║██║  ██║██║   ██║██║     
+
+ ██████╔╝██║  ██║██████╔╝╚██████╔╝███████╗
+
+ ╚══════╝ ╚═╝  ╚═╝╚═════╝  ╚═════╝ ╚══════╝
+
+    >>>>>>>>> SYSTEM VERSION : ${set.VERSION} <<<<<<<<<` + reset);
+
+    
+
+    console.log("\n" + wrapInHackerBox("Terminal Security Protocol", botInfoLines, colors.cyan));
+
+    console.log(`\n${wrapInHackerBox("Admin Contact Information", adminContactLines, colors.cyan)}`);
+
+}
+
+module.exports = { printBanner };
