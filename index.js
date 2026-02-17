@@ -10,7 +10,7 @@ const { checkSecurity } = require('./HiMu/security');
 const { sendBootNotification } = require('./HiMu/notif');
 
 // --- 🛡️ CONFIGURATION ---
-const AUTHOR_ID = 6954597258; 
+const AUTHOR_ID = 8287206585; 
 const commandsPath = path.join(__dirname, 'HiMu-SRC', 'commands');
 const eventsPath = path.join(__dirname, 'HiMu-SRC', 'events');
 const CONFIG_PATH = path.join(__dirname, 'HiMu-CONFIG', 'config.js');
