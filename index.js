@@ -13,7 +13,7 @@ const { sendBootNotification } = require('./BADOL/notif');
 const AUTHOR_ID = 6954597258; 
 const commandsPath = path.join(__dirname, 'HiMu-SRC', 'commands');
 const eventsPath = path.join(__dirname, 'HiMu-SRC', 'events');
-const CONFIG_PATH = path.join(__dirname, 'HiMu-Config', 'config.js');
+const CONFIG_PATH = path.join(__dirname, 'HiMu-CONFIG', 'config.js');
 const NOPREFIX_SETTINGS_FILE = path.join(__dirname, 'noprefix_settings.json');
 
 // --- 🛡️ SECURITY CHECK ---
