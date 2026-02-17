@@ -11,9 +11,9 @@ const { sendBootNotification } = require('./BADOL/notif');
 
 // --- 🛡️ CONFIGURATION ---
 const AUTHOR_ID = 6954597258; 
-const commandsPath = path.join(__dirname, 'MCS-BOT', 'Cmd');
-const eventsPath = path.join(__dirname, 'MCS-BOT', 'Event');
-const CONFIG_PATH = path.join(__dirname, 'MCS-Config', 'config.js');
+const commandsPath = path.join(__dirname, 'HiMu', 'Cmd');
+const eventsPath = path.join(__dirname, 'HiMu', 'Event');
+const CONFIG_PATH = path.join(__dirname, 'HiMu-Config', 'config.js');
 const NOPREFIX_SETTINGS_FILE = path.join(__dirname, 'noprefix_settings.json');
 
 // --- 🛡️ SECURITY CHECK ---
