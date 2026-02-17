@@ -8,7 +8,7 @@ let hostedUrls = [];
 
 module.exports.config = {
     name: "uphost",
-    credits: "MOHAMMAD-BADOL",
+    credits: "LIKHON AHMED",
     aliases: ["host", "up"],
     prefix: true,
     permission: 1,
