@@ -4,7 +4,7 @@ module.exports = {
     config: {
         name: "start",
         version: "1.6.0",
-        author: "MOHAMMAD-BADOL",
+        author: " LIKHON AHMED",
         countDown: 5,
         role: 0,
         description: "বটের মেইন মেনু এবং পরিচিতি",
