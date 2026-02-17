@@ -1,15 +1,15 @@
 async function sendBootNotification(bot, botName, authorId) {
-    // Google Drive Direct Link Fix
+
     const photoUrl = 'https://lh3.googleusercontent.com/u/0/d/1lf3TVYxwMsDZqByetetgtPf3mlBFcWMB'; 
 
     const message = `
 🌟 **SYSTEM STATUS: ONLINE** 🌟
 ━━━━━━━━━━━━━━━━━━━━━━━━
-🤖 **Bot Name:** ${botName}
-🆔 **Admin ID:** \`${authorId}\`
-📅 **Date:** ${new Date().toLocaleDateString('en-GB')}
-⏰ **Time:** ${new Date().toLocaleTimeString('en-US', { hour12: true, timeZone: 'Asia/Dhaka' })}
-🛡️ **Security:** System Fully Protected
+🤖 Bot Name: ${botName}
+🆔 Admin ID: \`${authorId}\`
+📅 Date: ${new Date().toLocaleDateString('en-GB')}
+⏰ Time: ${new Date().toLocaleTimeString('en-US', { hour12: true, timeZone: 'Asia/Dhaka' })}
+🛡️ security: System Fully Protected
 ━━━━━━━━━━━━━━━━━━━━━━━━
 📢 *Greetings Boss! Your bot is now active and ready to serve.*`;
 
