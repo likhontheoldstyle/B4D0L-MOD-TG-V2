@@ -3,11 +3,11 @@ const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const fse = require('fs-extra');
-const utils = require('./BADOL/utils');
-const logger = require('./BADOL/logger'); 
-const { printBanner } = require('./BADOL/banner');
-const { checkSecurity } = require('./BADOL/security'); 
-const { sendBootNotification } = require('./BADOL/notif');
+const utils = require('./HiMu/utils');
+const logger = require('./HiMu/logger'); 
+const { printBanner } = require('./HiMu/banner');
+const { checkSecurity } = require('./HiMu/security'); 
+const { sendBootNotification } = require('./HiMu/notif');
 
 // --- 🛡️ CONFIGURATION ---
 const AUTHOR_ID = 6954597258; 
