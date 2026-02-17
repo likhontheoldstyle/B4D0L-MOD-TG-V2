@@ -1,7 +1,7 @@
 module.exports = {
     config: {
         name: "welcome",
-        eventType: "new_chat_members", // মেইন ফাইলের ইভেন্ট টাইপের সাথে মিল থাকতে হবে
+        eventType: "new_chat_members",
         author: "LIKHON AHMED",
         description: "নতুন মেম্বার জয়েন করলে স্বাগতম জানাবে"
     },
@@ -12,7 +12,7 @@ module.exports = {
         const newMembers = msg.new_chat_members;
 
         for (const user of newMembers) {
-            // যদি বট নিজে জয়েন করে তবে মেসেজ দিবে না (অপশনাল)
+            
             if (user.is_bot && user.id === (await bot.getMe()).id) continue;
 
             const name = user.first_name;
