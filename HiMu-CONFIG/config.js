@@ -2,24 +2,24 @@ Module.exports = {
   BOT_TOKEN: "YOUR-BOT-TOKEN-HERE",
 
   BOT_SETTINGS: {
-    NAME: "𝄞⋆⃝🧚‍𝐌𝐂𝐒-𝐁𝐎𝐓🧚‍⋆⃝𝄞",
+    NAME: "HIMU BOT",
     VERSION: "2.5.0-VIP",
     PREFIX: "/",
-    ADMINS: ["6954597258"],
-    CREDIT: "MOHAMMAD BADOL",
-    FOOTER: "© 𝟐𝟎𝟐𝟔 𝐌𝐂𝐒 𝐁𝐎𝐓 𝐏𝐑𝐎𝐉𝐄𝐂𝐓"
+    ADMINS: ["8287206585"],
+    CREDIT: "LIKHON AHMED",
+    FOOTER: "© A X-TREM BYPASS PACKAGE"
   },
 
   OWNER: {
-    ID: 6954597258, // [WARNING] CRITICAL ID: DO NOT CHANGE! If this ID is modified, the bot's core authentication will fail and it will stop working.
-    NAME: "MOHAMMAD BADOL",
-    USERNAME: "B4D9L_007"
+    ID: 8287206585, // [WARNING] DON'T CHANGE OWNER ID.
+    NAME: "LIKHON AHMED",
+    USERNAME: "LIKHONAHMED009"
   },
 
   SOCIAL: {
-    FACEBOOK: "https://www.facebook.com/B4D9L",
-    WHATSAPP: "https://wa.me/+8801782721761",
-    TELEGRAM: "https://t.me/mreditorzone"
+    FACEBOOK: "https://www.facebook.com/LIKHONAHMED009",
+    WHATSAPP: "https://wa.me/+8801761838316",
+    TELEGRAM: "https://t.me/OGGY_OFFICIAL0"
   },
 
   DESIGN: {
