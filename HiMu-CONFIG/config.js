@@ -1,5 +1,5 @@
-Module.exports = {
-  BOT_TOKEN: "YOUR-BOT-TOKEN-HERE",
+module.exports = {
+  BOT_TOKEN: "8345906422:AAEZBBcO7vtO6ZPhiJoWCFKN3kAEfITOjsY",
 
   BOT_SETTINGS: {
     NAME: "HIMU BOT",
