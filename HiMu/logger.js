@@ -27,4 +27,4 @@ const logger = {
     }
 };
 
-module.exports = const
+module.exports = logger;
